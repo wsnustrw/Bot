@@ -4,15 +4,15 @@ const { API_KEY_RM_BG } = require('../config');
 const EditPhotoHandler = async (text, msg) => {
     const cmd = text.split('/');
     if (cmd.length < 2) {
-        return msg.reply('Format Salah. ketik *edit_bg/warna*');
+        return msg.reply('Wrong Format. try *bg/color*');
     }
 
     if (msg.hasMedia) {
         if (msg.type != 'image') {
-            return msg.reply('hanya bisa edit dengan format image.');
+            return msg.reply('Only can be edited with img format.');
         }
 
-        msg.reply('sedang diproses, tunggu bentar ya.');
+        msg.reply('wait a couple sec, your order is on process.');
 
         const media = await msg.downloadMedia();
 
@@ -21,12 +21,12 @@ const EditPhotoHandler = async (text, msg) => {
             const newPhoto = await EditPhotoRequest(media.data, color)
 
             if (!newPhoto.success) {
-                return msg.reply('Terjadi kesalahan.');
+                return msg.reply('Error.');
             }
 
             const chat = await msg.getChat();
             media.data = newPhoto.base64;
-            chat.sendMessage(media, { caption: 'ini hasilnya' })
+            chat.sendMessage(media, { caption: 'Thankyou, dont forget to give feedback xp' })
         }
     }
 }

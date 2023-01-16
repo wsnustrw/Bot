@@ -29,7 +29,7 @@ client.on('message', async msg => {
     }
 
     // #edit_bg/bg_color
-    if (text.includes("#edit_bg/")) {
+    if (text.includes("#bg/")) {
         await EditPhotoHandler(text, msg);
     }
     // #ask/question?
